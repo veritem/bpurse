@@ -1,6 +1,7 @@
 import {join} from 'path';
 import AutoLoad, {AutoloadPluginOptions} from 'fastify-autoload';
 import {FastifyPluginAsync} from 'fastify';
+import fastifySwagger from "fastify-swagger"
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -17,6 +18,25 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
+
+  fastify.register(fastifySwagger, {
+    exposeRoute: true,
+    openapi: {
+      info: {
+        title: "bpurse api",
+        description: "bpurse api",
+        version: "1.0.0"
+      },
+      servers: [
+        {
+          url: "http://localhost:3000"
+        }
+      ]
+    },
+    routePrefix: "/docs",
+    hideUntagged: true,
+  })
+
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts
