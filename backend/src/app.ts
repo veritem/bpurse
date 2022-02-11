@@ -2,6 +2,8 @@ import {join} from 'path';
 import AutoLoad, {AutoloadPluginOptions} from 'fastify-autoload';
 import {FastifyPluginAsync} from 'fastify';
 import fastifySwagger from "fastify-swagger"
+import prismaPlugin from './plugins/prisma';
+
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -18,6 +20,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
+
+  fastify.register(prismaPlugin)
 
   fastify.register(fastifySwagger, {
     exposeRoute: true,
