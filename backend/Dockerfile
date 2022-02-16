@@ -1,22 +1,23 @@
-FROM node:16-alpine 
+FROM node:16 
 
-# USER node 
+FROM node:16-alpine
+
+RUN npm add -g pnpm
+
+WORKDIR /app
 
 
-WORKDIR /src/app
+COPY package.json .
 
+RUN pnpm install
 
+# Add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-
-COPY ./package.json ./
-
-RUN npm install
 
 COPY . .
 
+RUN pnpm install
+
 EXPOSE 3000
 
-CMD ["npm","run", "dev"]
-
-
+CMD ["pnpm","dev"]
