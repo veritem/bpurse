@@ -26,6 +26,8 @@ services:
       - "./backend:/app"
     env_file:
       - "backend/.env"
+    depends_on: 
+      - db
 volumes:
   db:
     driver: local

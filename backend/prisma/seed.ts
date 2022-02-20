@@ -1,12 +1,23 @@
-import {Prisma, PrismaClient} from "@prisma/client"
+import { PrismaClient} from "@prisma/client"
+import {faker} from "@faker-js/faker"
 
 const prisma = new PrismaClient()
 
-// const userData: Prisma.UserCreateInput = [
 
-// ]
 
-async function main() {}
+async function main() {
+  let numberOfUsers = 0
+
+  while(numberOfUsers < 10) {
+  await prisma.user.create({
+      data: {
+         email: faker.internet.email(),
+         name: faker.internet.userName(),
+      },
+   }) 
+   numberOfUsers++
+  };
+}
 
 
 main().catch(e => {

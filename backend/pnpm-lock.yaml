@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@faker-js/faker': ^6.0.0-alpha.6
   '@prisma/client': ^3.9.2
   '@types/node': ^17.0.8
   '@types/tap': ^15.0.5
@@ -15,7 +16,7 @@ specifiers:
   nodemon: ^2.0.15
   prisma: ^3.9.2
   tap: ^15.1.6
-  ts-node: ^10.4.0
+  ts-node: ^10.5.0
   typescript: ^4.5.4
 
 dependencies:
@@ -29,6 +30,7 @@ dependencies:
   prisma: 3.9.2
 
 devDependencies:
+  '@faker-js/faker': 6.0.0-alpha.6
   '@types/node': 17.0.16
   '@types/tap': 15.0.5
   concurrently: 7.0.0
@@ -252,6 +254,11 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@cspotcode/source-map-consumer': 0.8.0
+    dev: true
+
+  /@faker-js/faker/6.0.0-alpha.6:
+    resolution: {integrity: sha512-+jatKq8wYwOgCpVQ0wE4t9BglS16qJH/Nu4WjPU+ABTywivTY8BCsD1XIZhw9iXDq3t1InyiXmz+R70TcUMbrg==}
+    engines: {node: '>=14.0.0', npm: '>=7.0.0'}
     dev: true
 
   /@fastify/ajv-compiler/1.1.0:

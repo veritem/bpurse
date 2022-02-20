@@ -41,6 +41,31 @@ const app: FastifyPluginAsync<AppOptions> = async (
     hideUntagged: true,
   })
 
+  fastify.addSchema({
+    $id: "User",
+    type: "object",
+    properties: {
+      id: {
+        type: "string"
+      },
+      email: {
+        type: "string"
+      },
+      name: {
+        type: "string"
+      },
+      password: {
+        type: "string"
+      },
+      createdAt: {
+        type: "string"
+      },
+      updatedAt: {
+        type: "string"
+      }
+    }
+  })
+
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts
