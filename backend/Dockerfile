@@ -21,7 +21,6 @@ COPY . .
 
 RUN pnpm install
 
-RUN pnpm dlx prisma migrate dev
 
 EXPOSE 3000
 
