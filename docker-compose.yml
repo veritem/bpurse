@@ -1,6 +1,19 @@
-version: "3.8" 
+version: "3" 
 
 services:
+
+  ui:
+    image: ui
+    stdin_open: true 
+    tty: true 
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - "./frontend:/app"
+
   api: 
     image: api
     stdin_open: true # docker run -i
@@ -14,8 +27,7 @@ services:
       - "./backend:/app"
     env_file:
       - "backend/.env"
-    depends_on: 
-      - db
+
 volumes:
   db:
     driver: local
