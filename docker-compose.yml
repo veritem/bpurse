@@ -2,17 +2,17 @@ version: "3"
 
 services:
 
-  ui:
-    image: ui
-    stdin_open: true 
-    tty: true 
-    build:
-      context: frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4003:4003"
-    volumes:
-      - "./frontend:/app"
+  # ui:
+  #   image: ui
+  #   stdin_open: true 
+  #   tty: true 
+  #   build:
+  #     context: frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4003:4003"
+  #   volumes:
+  #     - "./frontend:/app"
 
   api: 
     image: api
