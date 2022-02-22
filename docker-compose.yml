@@ -10,7 +10,7 @@ services:
       context: frontend
       dockerfile: Dockerfile
     ports:
-      - "4000:4000"
+      - "4003:4003"
     volumes:
       - "./frontend:/app"
 
@@ -22,7 +22,7 @@ services:
       context: backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "4004:4004"
     volumes:
       - "./backend:/app"
     env_file:
