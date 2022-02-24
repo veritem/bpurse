@@ -1,8 +1,6 @@
-import { join } from 'path';
-import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
+import { AutoloadPluginOptions } from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
-import fastifySwagger from 'fastify-swagger';
-// import prismaPlugin from './plugins/prisma';
+import { join } from 'desm';
 
 export type AppOptions = {
 	// Place your custom options for app below here.
@@ -12,74 +10,75 @@ const app: FastifyPluginAsync<AppOptions> = async (
 	fastify,
 	opts
 ): Promise<void> => {
-	// Place here your custom code!
+	// fastify.decorate('authenticate', async function (req, resp) {
+	// 	const token = request.headers['authorization'];
+	// 	if (!token) {
+	// 		reply.send({
+	// 			status: false,
+	// 			message: 'No token provided.'
+	// 		});
+	// 		return;
+	// 	}
+	// 	try {
+	// 		const decoded = fastify.jwt.verify(token);
+	// 		request.userId = decoded;
+	// 		// reply.send({
+	// 		// 	status: true,
+	// 		// 	message: 'Authenticated.'
+	// 		// });
+	// 	} catch (err) {
+	// 		reply.send({
+	// 			status: false,
+	// 			message: 'Invalid token.'
+	// 		});
+	// 	}
+	// });
 
-	
+	// fastify.decorate('authenticate', async function (request, reply) {});
 
-	// Do not touch the following lines
+	fastify.register(import('fastify-cors'));
 
-	// This loads all plugins defined in plugins
-	// those should be support plugins that are reused
-	// through your application
+	fastify.register(import('fastify-jwt'), {
+		secret: 'scretkey',
+		sign: {
+			expiresIn: '1d'
+		}
+	});
 
-
-	fastify.register(fastifySwagger, {
+	fastify.register(import('fastify-swagger'), {
 		exposeRoute: true,
-		openapi: {
+		swagger: {
 			info: {
 				title: 'bpurse api',
 				description: 'bpurse api',
 				version: '1.0.0'
 			},
-			servers: [
-				{
-					url: 'http://localhost:3000'
+			securityDefinitions: {
+				bearerAuth: {
+					type: 'apiKey',
+					name: 'Authorization',
+					in: 'header'
 				}
-			]
+			},
+			consumes: ['application/json'],
+			produces: ['application/json']
 		},
 		routePrefix: '/docs',
 		hideUntagged: true
 	});
 
-	fastify.addSchema({
-		$id: 'User',
-		type: 'object',
-		properties: {
-			id: {
-				type: 'string'
-			},
-			email: {
-				type: 'string'
-			},
-			name: {
-				type: 'string'
-			},
-			password: {
-				type: 'string'
-			},
-			createdAt: {
-				type: 'string'
-			},
-			updatedAt: {
-				type: 'string'
-			}
-		}
-	});
-
-	void fastify.register(AutoLoad, {
-		dir: join(__dirname, 'plugins'),
+	void fastify.register(import('fastify-autoload'), {
+		dir: join(import.meta.url, 'plugins'),
 		options: opts
 	});
 
 	// This loads all plugins defined in routes
 	// define your routes in one of these
-	void fastify.register(AutoLoad, {
-		dir: join(__dirname, 'routes'),
+	void fastify.register(import('fastify-autoload'), {
+		dir: join(import.meta.url, 'routes'),
 		options: opts
 	});
 };
-
-
 
 export default app;
 export { app };
