@@ -11,10 +11,3 @@ export default fp<SupportPluginOptions>(async (fastify, _opts) => {
 		return 'hugs';
 	});
 });
-
-// When using .decorate you have to specify added properties for Typescript
-declare module 'fastify' {
-	export interface FastifyInstance {
-		someSupport(): string;
-	}
-}

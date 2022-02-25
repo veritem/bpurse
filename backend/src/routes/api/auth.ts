@@ -69,14 +69,12 @@ const auth: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
 		async function (req, _resp) {
 			const { name, email, password } = req.body;
 
-			const userExists = await fastify.prisma.user.findUnique(
-				{ where: { email } }
-			);
+			const userExists = await fastify.prisma.user.findUnique({
+				where: { email }
+			});
 
 			if (userExists) {
-				throw new errors.BadRequest(
-					'User already exists'
-				);
+				throw new errors.BadRequest('User already exists');
 			}
 
 			const hashedPassword = await bcrypt.hash(password, 10);
@@ -112,20 +110,13 @@ const auth: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
 			});
 
 			if (!user) {
-				throw new errors.BadRequest(
-					'Invalid email or password'
-				);
+				throw new errors.BadRequest('Invalid email or password');
 			}
 
-			const valid = await bcrypt.compare(
-				password,
-				user.password
-			);
+			const valid = await bcrypt.compare(password, user.password);
 
 			if (!valid) {
-				throw new errors.BadRequest(
-					'Invalid email or password'
-				);
+				throw new errors.BadRequest('Invalid email or password');
 			}
 
 			let token = fastify.jwt.sign({

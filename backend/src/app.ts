@@ -1,5 +1,6 @@
 import { AutoloadPluginOptions } from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 import { join } from 'desm';
 
 export type AppOptions = {
@@ -10,31 +11,37 @@ const app: FastifyPluginAsync<AppOptions> = async (
 	fastify,
 	opts
 ): Promise<void> => {
-	// fastify.decorate('authenticate', async function (req, resp) {
-	// 	const token = request.headers['authorization'];
-	// 	if (!token) {
-	// 		reply.send({
-	// 			status: false,
-	// 			message: 'No token provided.'
-	// 		});
-	// 		return;
-	// 	}
-	// 	try {
-	// 		const decoded = fastify.jwt.verify(token);
-	// 		request.userId = decoded;
-	// 		// reply.send({
-	// 		// 	status: true,
-	// 		// 	message: 'Authenticated.'
-	// 		// });
-	// 	} catch (err) {
-	// 		reply.send({
-	// 			status: false,
-	// 			message: 'Invalid token.'
-	// 		});
-	// 	}
-	// });
+	fastify.decorate(
+		'authenticate',
+		async function (request: FastifyRequest, reply: FastifyReply) {
+			const token = request.headers['authorization']?.split(' ')[1];
+			if (!token) {
+				reply.send({
+					status: false,
+					message: 'No token provided.'
+				});
+				return;
+			}
+			try {
+				const decoded: { id: string } = fastify.jwt.verify(token);
 
-	// fastify.decorate('authenticate', async function (request, reply) {});
+				const user = await fastify.prisma.user.findUnique({
+					where: {
+						id: decoded.id
+					}
+				});
+
+				if (user) {
+					request.user = user;
+				}
+			} catch (err) {
+				reply.send({
+					status: false,
+					message: 'Invalid token.'
+				});
+			}
+		}
+	);
 
 	fastify.register(import('fastify-cors'));
 

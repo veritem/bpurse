@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "This project was bootstrapped with Fastify-CLI.",
 	"main": "app.ts",
+	"type": "module",
 	"directories": {
 		"test": "test"
 	},

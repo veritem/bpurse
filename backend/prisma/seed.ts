@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import bcrypt from 'bcryptjs';
+import pkg from '@prisma/client';
 
-const prisma = new PrismaClient();
+const prisma = new pkg.PrismaClient();
 
 async function main() {
 	let numberOfUsers = 0;
@@ -12,11 +12,7 @@ async function main() {
 			data: {
 				email: faker.internet.email(),
 				name: faker.internet.userName(),
-				type: faker.random.arrayElement([
-					'USER',
-					'MANAGER',
-					'ACCOUNTANT'
-				]),
+				type: faker.random.arrayElement(['USER', 'MANAGER', 'ACCOUNTANT']),
 				password: bcrypt.hashSync('123456', 10)
 			}
 		});
