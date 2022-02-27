@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(cuid())
-  email       String        @unique
-  name        String
-  type        Role          @default(USER)
-  password    String
-  budgets     Budget[]
-  Transaction Transaction[]
+  id           String         @id @default(cuid())
+  email        String         @unique
+  name         String
+  type         Role           @default(USER)
+  password     String
+  budgets      Budget[]
+  Transaction  Transaction[]
+  Notification Notification[]
 }
 
 enum Role {
@@ -74,4 +72,24 @@ enum TransactionStatus {
   SIGNED
   PENDING
   REJECTED
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  message   String
+  type      NotificationType @default(INFO)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  user      User             @relation(fields: [userId], references: [id])
+}
+
+enum NotificationType {
+  NEW_BUDGET
+  NEW_TRANSACTION
+  EDIT_TRAANSACTION
+  EDIT_BUDGET
+  DELETE_BUDGET
+  DELETE_TRANSACTION
+  INFO
 }
