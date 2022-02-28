@@ -12,6 +12,9 @@ import { FastifyPluginAsync } from 'fastify';
 // type UserType = Static<typeof user>;
 
 const users: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
+
+	fastify.addHook('onRequest', fastify.authenticate);
+
 	fastify.get(
 		'/',
 		{
@@ -25,6 +28,26 @@ const users: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
 			return await fastify.prisma.user.findMany();
 		}
 	);
+
+	fastify.get(
+		'/auth/me',
+		{
+			schema: {
+				tags: ['auth'],
+				security: [
+					{
+						bearerAuth: []
+					}
+				]
+			}
+		},
+		async function (req, _resp) {
+
+			return req.user
+		}
+	);
+
+
 };
 
 export default users;

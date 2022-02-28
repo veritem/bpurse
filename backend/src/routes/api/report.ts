@@ -1,25 +1,59 @@
-import { FastifyPluginAsync } from "fastify";
+import { FastifyPluginAsync } from 'fastify';
 
 const report: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
 
-    //TODO: add hook to handle authentication
+    fastify.get<{ Params: { startDate: string, endDate: string } }>(
+        '/reports/transactions/:startDate/:endDate',
+        {
+            schema: {
+                tags: ['report'],
+                params: {
+                    startDate: { type: 'string' },
+                    endDate: { type: 'string' }
+                }
+            }
+        },
+        async (req, _res) => {
 
-    fastify.get("/reports/transactions/:startDate/:endDate", {
-        schema: {
-            tags: ["report"],
+            const { startDate, endDate } = req.params;
+
+            return await fastify.prisma.transactions.findMany({
+                where: {
+                    createdAt: {
+                        gte: startDate,
+                        lte: endDate
+                    }
+                }
+            });
         }
-    }, async (req, res) => {
-        return { message: true }
-    })
+    );
 
-    fastify.get("/reports/budget/:startDate/:endDate", {
-        schema: {
-            tags: ["report"],
+    fastify.get<{ Params: { startDate: string, endDate: string } }>(
+        '/reports/budget/:startDate/:endDate',
+        {
+            schema: {
+                tags: ['report'],
+                params: {
+                    startDate: { type: 'string' },
+                    endDate: { type: 'string' }
+                }
+            }
+        },
+        async (req, _res) => {
+
+            const { startDate, endDate } = req.params;
+
+
+            return await fastify.prisma.budget.findMany({
+                where: {
+                    createdAt: {
+                        gte: startDate,
+                        lte: endDate
+                    },
+                }
+            })
         }
-    }, async (req, res) => {
-        return { message: true }
-    })
+    );
+};
 
-}
-
-export default report
+export default report;

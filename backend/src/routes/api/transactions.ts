@@ -1,5 +1,5 @@
+import { Static, Type } from '@sinclair/typebox';
 import { FastifyPluginAsync } from 'fastify';
-import { Type, Static } from '@sinclair/typebox';
 
 const createOrUpdate = Type.Object({
 	name: Type.String(),
@@ -18,8 +18,8 @@ const transactions: FastifyPluginAsync = async (
 	fastify,
 	_opts
 ): Promise<void> => {
-	fastify.addHook('onRequest', fastify.authenticate);
 
+	fastify.addHook('onRequest', fastify.authenticate);
 	fastify.get(
 		'/transactions',
 		{
