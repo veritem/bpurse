@@ -11,7 +11,6 @@ const messaging: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     });
 
 
-    // fastify.post("/messaging", {
 
 }
 
