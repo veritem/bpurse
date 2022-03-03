@@ -18,7 +18,6 @@ const transactions: FastifyPluginAsync = async (
 	fastify,
 	_opts
 ): Promise<void> => {
-
 	fastify.addHook('onRequest', fastify.authenticate);
 	fastify.get(
 		'/transactions',

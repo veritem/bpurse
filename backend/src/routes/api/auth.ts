@@ -23,8 +23,6 @@ const register = Type.Object({
 type Register = Static<typeof register>;
 
 const auth: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
-
-
 	fastify.post<{ Body: Register }>(
 		'/auth/register',
 		{
