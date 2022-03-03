@@ -19,8 +19,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY . .
 
-RUN pnpm install
-
 
 EXPOSE 4002
 
