@@ -6,19 +6,19 @@ RUN apt-get update && apt-get install -y openssl
 
 RUN npm add -g pnpm
 
-WORKDIR /app
+WORKDIR /usr/app 
 
 
-COPY package.json .
+COPY . .
+
 
 RUN pnpm install
 
 # Add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY . .
+ENV FASTIFY_ADDRESS=0.0.0.0
 
-
-EXPOSE 4002
+EXPOSE 4004
 
 CMD ["pnpm","dev"]
