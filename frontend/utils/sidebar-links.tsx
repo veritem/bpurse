@@ -1,7 +1,7 @@
 import React from "react";
 import { system_users } from "./constants";
 
-export const AdminLinks = [
+export const adminLinks = [
   {
     name: "Budget",
     href: "/budget",
@@ -140,12 +140,10 @@ export const EmployeeLinks = [
   }
 ];
 
-export const getDashboardLink = (user) => {
+export const getDashboardLink = (user:any) => {
   switch (user.category) {
     case system_users.EMPLOYEE:
       return "/employee";
-    case system_users.PARENT:
-      return "/parent";
     case system_users.ADMIN:
       return "/admin";
     default:

@@ -1,3 +1,10 @@
 export interface SystemUser{
-    name:string
+    authUser:AuthUser
+}
+
+interface AuthUser{
+    imageUrl:string,
+    fullNames:string,
+    username:string,
+    email:string
 }

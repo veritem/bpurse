@@ -1,19 +1,19 @@
-import Logo from "../Logo";
 import styles from "../../styles/components/sidebar.module.css"
 import Link from "next/link"
 import { useSelector } from "react-redux";
 import { getDashboardLink } from "../../utils/sidebar-links";
 import Router from "next/router";
+import Logo from "../../public/app-logo.svg";
 
-export default function Sidebar({ navList = [] }) {
-    const authUser = useSelector(state => state.authUser)
+export default function Sidebar({ navList }:any) {
+    // const authUser = useSelector(state => state.authUser)
 
     return (
         <div className="bg-white vh-100 border-right py-3 pl-4">
-            <Logo />
+            <img src={Logo.src}/>
             <hr />
             <div className="dashboard my-3">
-                <Link href={getDashboardLink(authUser) + "/dashboard"} passHref>
+                {/* <Link href={getDashboardLink(authUser) + "/dashboard"} passHref>
                     <div
                         style={{ color: '#707070' }} className={"d-flex px-3 py-2 rounded-sm align-items-center mr-3 " + styles.sidebarLink}>
                         <div>
@@ -27,12 +27,12 @@ export default function Sidebar({ navList = [] }) {
                             <span style={{ fontSize: '15px' }}>Dashboard</span>
                         </div>
                     </div>
-                </Link>
+                </Link> */}
             </div>
             <h6 style={{ fontSize: 14 }} className="font-weight-light text-secondary mr-4">MAIN MENU</h6>
             <div className={"main-menu " + styles.mainMenu}>
                 {
-                    navList.map((list, i) => (
+                    navList.map((list:any, i:number) => (
                         <Link href={list.href} key={i} passHref>
                             <div
                                 className={"d-flex px-3 py-2 rounded-sm align-items-center mb-2 text-secondary mr-3 " + (styles.sidebarLink)}>

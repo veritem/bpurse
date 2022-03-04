@@ -1,8 +1,8 @@
-import Sidebar from "../../components/dashboards/Sidebar";
-import AdminNavbar from "../../components/dashboards/AdminNavbar";
-import { adminLinks, quickCreateActions } from "../../utils/sidebar-links";
-import RouteProtector from "../../middlewares/RouteProtector";
-import { system_users } from "../../utils/constants";
+import Sidebar from "../components/layouts/Sidebar";
+import AdminNavbar from "../components/dashboards/AdminNavbar";
+import { adminLinks } from "../utils/sidebar-links";
+import RouteProtector from "../middlewares/RouteProtector";
+import { system_users } from "../utils/constants";
 import React, { useEffect, useState } from "react";
 import Link from "next/link"
 
@@ -26,20 +26,12 @@ const QuickActions = () => {
                     <div><span className="pl-2">Create New</span></div>
                 </div>
             </button>
-            <div className="dropdown-menu shadow-lg" aria-labelledby="dropdownMenuButton">
-                {
-                    quickCreateActions.map((action, i) => (
-                        <Link href={"/admin/" + action.href} passHref key={i}>
-                            <a className="dropdown-item" href={"/admin/" + action.href} key={i}>{action.name}</a>
-                        </Link>
-                    ))
-                }
-            </div>
+         
         </div>
     )
 }
 
-export default function AdminDashboard({ children }) {
+export default function AdminLayout({ children }:any) {
     const [showSidebar, setShowSidebar] = useState(true)
 
     useEffect(() => {
