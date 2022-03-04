@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const domain ="http://00d6-197-243-61-202.ngrok.io"
-import AuthService from './AuthService'
-
+import AuthService from './user/AuthService'
+import Router from "next/router";
 
 const http = axios.create({
     baseURL: `${domain}/api`,

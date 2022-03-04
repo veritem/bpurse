@@ -1,0 +1,5 @@
+
+export const APP_CONFIG = {
+}
+
+export const LOCAL_STORAGE_TOKEN_KEY = "DSJDKSJDSdsd/G0spCYq44fQCTDWSVO6gq2/BPURSE_SYTEM+Kqx0bebEqAtQuEUU"
