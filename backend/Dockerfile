@@ -1,27 +1,21 @@
-FROM node:16-bullseye-slim as base
+FROM node:17
 
-# Install openssl for Prisma
-RUN apt-get update && apt-get install -y openssl
-
-# FROM node:16-alpine
 
 RUN npm add -g pnpm
 
-WORKDIR /app
+WORKDIR /home/app
 
 
-COPY package.json .
+COPY . .
+
 
 RUN pnpm install
 
 # Add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY . .
+ENV FASTIFY_ADDRESS=0.0.0.0
 
-RUN pnpm install
-
-
-EXPOSE 4002
+EXPOSE 4004
 
 CMD ["pnpm","dev"]

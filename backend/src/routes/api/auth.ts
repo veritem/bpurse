@@ -1,9 +1,9 @@
-import { FastifyPluginAsync } from 'fastify';
-import errors from 'http-errors';
 import { Static, Type } from '@sinclair/typebox';
 // import { User } from '@prisma/client';
 // type UserType = Static<typeof user>;
 import bcrypt from 'bcryptjs';
+import { FastifyPluginAsync } from 'fastify';
+import errors from 'http-errors';
 
 const login = Type.Object({
 	email: Type.String({ format: 'email' }),
@@ -23,40 +23,6 @@ const register = Type.Object({
 type Register = Static<typeof register>;
 
 const auth: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
-	fastify.get(
-		'/auth/me',
-		{
-			schema: {
-				tags: ['auth'],
-				security: [
-					{
-						bearerAuth: []
-					}
-				]
-			}
-		},
-		async function (_req, _resp) {
-			return { root: true };
-		}
-	);
-
-	fastify.get(
-		'/auth/logout',
-		{
-			schema: {
-				tags: ['auth'],
-				security: [
-					{
-						bearerAuth: []
-					}
-				]
-			}
-		},
-		async function (_req, _resp) {
-			return { root: true };
-		}
-	);
-
 	fastify.post<{ Body: Register }>(
 		'/auth/register',
 		{
