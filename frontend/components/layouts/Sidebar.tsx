@@ -1,52 +1,43 @@
-import styles from "../../styles/components/sidebar.module.css"
-import Link from "next/link"
-import { useSelector } from "react-redux";
-import { getDashboardLink } from "../../utils/sidebar-links";
-import Router from "next/router";
-import Logo from "../../public/app-logo.svg";
+import { useState } from "react";
 
-export default function Sidebar({ navList }:any) {
-    // const authUser = useSelector(state => state.authUser)
+const Sidebar = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
 
-    return (
-        <div className="bg-white vh-100 border-right py-3 pl-4">
-            <img src={Logo.src}/>
-            <hr />
-            <div className="dashboard my-3">
-                {/* <Link href={getDashboardLink(authUser) + "/dashboard"} passHref>
-                    <div
-                        style={{ color: '#707070' }} className={"d-flex px-3 py-2 rounded-sm align-items-center mr-3 " + styles.sidebarLink}>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
-                                <path fill="none" d="M0 0h24v24H0z" />
-                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
-                                    fill="rgba(108,117,125,1)" />
-                            </svg>
-                        </div>
-                        <div className="pl-4">
-                            <span style={{ fontSize: '15px' }}>Dashboard</span>
-                        </div>
-                    </div>
-                </Link> */}
-            </div>
-            <h6 style={{ fontSize: 14 }} className="font-weight-light text-secondary mr-4">MAIN MENU</h6>
-            <div className={"main-menu " + styles.mainMenu}>
-                {
-                    navList.map((list:any, i:number) => (
-                        <Link href={list.href} key={i} passHref>
-                            <div
-                                className={"d-flex px-3 py-2 rounded-sm align-items-center mb-2 text-secondary mr-3 " + (styles.sidebarLink)}>
-                                <div style={{ marginTop: '-5px' }}>
-                                    {list.icon}
-                                </div>
-                                <div className="pl-4" style={{ fontSize: 15 }}>
-                                    {list.name}
-                                </div>
-                            </div>
-                        </Link>
-                    ))
-                }
-            </div>
-        </div>
-    )
-}
+  return (
+    <>
+      {showSidebar ? (
+        <button
+          className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"
+          onClick={() => setShowSidebar(!showSidebar)}
+        >
+          x
+        </button>
+      ) : (
+        <svg
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="fixed  z-30 flex items-center cursor-pointer right-10 top-6"
+          fill="#2563EB"
+          viewBox="0 0 100 80"
+          width="40"
+          height="40"
+        >
+          <rect width="100" height="10"></rect>
+          <rect y="30" width="100" height="10"></rect>
+          <rect y="60" width="100" height="10"></rect>
+        </svg>
+      )}
+
+      <div
+        className={`top-0 right-0 w-[35vw] bg-blue-600  p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-300 ${
+          showSidebar ? "translate-x-0 " : "translate-x-full"
+        }`}
+      >
+        <h3 className="mt-20 text-4xl font-semibold text-white">
+          I am a sidebar
+        </h3>
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
