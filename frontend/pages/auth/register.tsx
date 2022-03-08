@@ -97,7 +97,7 @@ const RegisterPage =() =>{
         <div className="bg-blue-700 p-5 min-h-screen">
             <LeftComponent />
         </div>
-        <div className="bg-white p-5">
+        <div className="bg-white p-5 items-center justify-center min-h-screen">
             <RightContent />
         </div>
     </div>
