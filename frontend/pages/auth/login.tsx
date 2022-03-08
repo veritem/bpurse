@@ -1,5 +1,6 @@
 import Welcome from "../../public/auth/welcome.svg";
 import WithGoogle from "../../public/auth/continue-google.svg";
+import { APP_CONFIG } from "../../utils/app-config";
 
 const RightContent = () => {
   return (
@@ -38,7 +39,7 @@ const RightContent = () => {
         </div>
     
         <div className="mt-4">
-         <span>Don't have an account ?</span><a className="ml-2 text-blue" href="#">Sign up</a>    
+         <span>Don't have an account ?</span><a className="ml-2 text-blue-700 underline" href="#">Sign up</a>    
         </div>
       </div>
     </div>
@@ -48,13 +49,13 @@ const RightContent = () => {
 
 const LeftComponent=()=>{
     return(
-    <div className="md:items-center">
-      <div className="mt-3">
-         <img src={Welcome.src}/> 
+    <div className="mt-16">
+      <div className="items-center justify-center flex">
+         <img src={Welcome.src} width={400}/> 
       </div>
       <div className="text-white  mt-5">
-          <h4 className="font-bold items-center justify-center flex text-xl">Welcome to B-Purse !</h4>
-          <p className="mt-2 font-light">B-purse is an online platform to manage budget transation in a given organization.</p>
+          <h4 className="font-bold items-center justify-center flex text-2xl">Welcome to B-Purse !</h4>
+          <p className="mt-2 font-light items-center flex justify-center">B-purse is an online platform to manage budget transation in a given organization.</p>
       </div>
       </div>
     )
@@ -62,6 +63,7 @@ const LeftComponent=()=>{
 const LoginPage = () => (
     <div className="grid grid-cols-2">
         <div className="bg-blue-700 p-5 min-h-screen w-1/1">
+            <h2 className="text-3xl text-white font-bold">{APP_CONFIG.APP_NAME} </h2>
             <LeftComponent />
         </div>
         <div className="bg-white p-5 min-h-screen flex justify-center items-center">
