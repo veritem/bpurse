@@ -1,7 +1,7 @@
 
 import http from "../http-common";
 import jwt from 'jwt-decode';
-import { LOCAL_STORAGE_TOKEN_KEY } from "../utils/app-config"
+import { LOCAL_STORAGE_TOKEN_KEY } from "../../utils/app-config"
 class AuthService {
 
   login(data:any) {

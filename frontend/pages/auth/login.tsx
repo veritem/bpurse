@@ -1,7 +1,7 @@
-import Welcome from "../public/auth/welcome.svg";
-import WithGoogle from "../public/auth/continue-google.svg";
-import { APP_CONFIG } from "../utils/app-config";
-import Router from "next/router";
+import Welcome from "../../public/auth/welcome.svg";
+import WithGoogle from "../../public/auth/continue-google.svg";
+import { APP_CONFIG } from "../../utils/app-config";
+
 const RightContent = () => {
   return (
     <div>
@@ -39,7 +39,7 @@ const RightContent = () => {
         </div>
     
         <div className="mt-4">
-         <span>Don't have an account ?</span><a className="ml-2 text-blue-700 underline cursor-pointer" onClick={()=>Router.push("/auth/register")}>Sign up</a>    
+         <span>Don't have an account ?</span><a className="ml-2 text-blue-700 underline" href="#">Sign up</a>    
         </div>
       </div>
     </div>

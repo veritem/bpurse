@@ -1,14 +1,14 @@
 import moment from "moment";
 
-export const updateJavaScriptObject = (details1, details2) => {
-    const outputObject = {};
+export const updateJavaScriptObject = (details1:any, details2:any) => {
+    const outputObject:any = {};
     Object.keys(details1)
-        .forEach(obj => outputObject[obj] =
+        .forEach((obj:any) => outputObject[obj] =
             (details2.hasOwnProperty(obj) ? details2[obj] : details1[obj]));
     return outputObject;
 }
 
-export const dateFormat = (date) => ({
+export const dateFormat = (date:any) => ({
     fromNow() {
         return moment(date).fromNow();
     },
@@ -18,6 +18,6 @@ export const dateFormat = (date) => ({
     }
 })
 
-export const getFormattedDate = (date) => {
+export const getFormattedDate = (date:any) => {
     return dateFormat(date)
 }
