@@ -18,10 +18,14 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bpurse
+      - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
     volumes:
+      - ./backend/db/init.sql:/docker-entrypoint-initdb.d/create_databases.sql
       - db:/var/lib/postgresql/data
 
   api:
