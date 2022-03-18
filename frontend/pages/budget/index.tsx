@@ -1,3 +1,4 @@
+import NewBudget from "../../components/modals/new-budget";
 import {
   BigDotIcon,
   DeleteIcon,
@@ -65,6 +66,7 @@ const BudgetPage = () => {
   return (
     <div>
      <Container/>
+     {/* <NewBudget/> */}
     </div>
   );
 };
