@@ -5,8 +5,8 @@ import { APP_CONFIG } from "../../utils/app-config";
 const RightContent = () => {
   return (
     <div>
-      <div className="border-b-2 pb-3 border-indigo-500 items-center flex justify-center">
-        <h5 className="font-bold text-xl">Login</h5>
+      <div className="border-b-5 pb-5 border-indigo-500 items-center flex justify-center">
+        <h5 className="font-bold text-2xl">Login</h5>
       </div>
       <form className="w-full max-w-sm">
         <div className="md:items-center mb-6 pt-5">
