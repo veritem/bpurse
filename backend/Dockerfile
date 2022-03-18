@@ -18,4 +18,5 @@ ENV FASTIFY_ADDRESS=0.0.0.0
 
 EXPOSE 4004
 
-CMD ["pnpm","dev"]
+
+CMD ["pnpm","start"]

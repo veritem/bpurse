@@ -1,4 +1,4 @@
-version: "3" 
+version: "3"
 
 services:
 
@@ -14,7 +14,21 @@ services:
   #   volumes:
   #     - "./frontend:/app"
 
-  api: 
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./backend/db/init.sql:/docker-entrypoint-initdb.d/create_databases.sql
+      - db:/var/lib/postgresql/data
+
+  api:
     image: api
     stdin_open: true # docker run -i
     tty: true # docker run -t
@@ -25,10 +39,12 @@ services:
       - "4004:4004"
     volumes:
       - "./backend:/app"
+    links:
+      - db
     env_file:
       - "backend/.env"
 
 volumes:
   db:
     driver: local
-  api: 
+  api:
